@@ -5,6 +5,8 @@
 
 package com.xbrl.log;
 
+import com.xbrl.server.common.Utilities;
+
 /**
  *
  * @author yzaman

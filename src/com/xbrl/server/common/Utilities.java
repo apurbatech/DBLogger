@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xbrl.log;
+package com.xbrl.server.common;
 
+import com.xbrl.log.LogWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
