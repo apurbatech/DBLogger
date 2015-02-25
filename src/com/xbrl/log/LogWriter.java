@@ -1,15 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.xbrl.log;
-
 import com.xbrl.server.common.Utilities;
-
 /**
  *
- * @author yzaman
+ * @author nazmul hasan
  */
 public class LogWriter
 {
@@ -180,6 +173,20 @@ public class LogWriter
             System.out.println("EXCEPTION: "+ex.toString());
             //ex.printStackTrace();
         }
+    }
+    /*
+     * This method will store message into a file
+     * @param msg, message to be written
+     * @author nazmul hasan on 25th February 2015
+     */
+    public void print_service(String msg)
+    {
+        if(isLogEnableInFile)
+        {
+            this.write(this.className+" : "+msg,"service");
+        }
+        if(isLogEnable)
+            System.out.println(msg);
     }
 
 }
