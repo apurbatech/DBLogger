@@ -14,6 +14,7 @@ import java.util.Date;
 public class AuthManager extends DBConnectionManager{
     private String ipAddress = "";
     LogWriter logger = new LogWriter();
+    private String message = "";
     /*
      * Constructor
      * @author nazmul on 24th February 2015
@@ -25,6 +26,23 @@ public class AuthManager extends DBConnectionManager{
         logger.enableLogInFile();
         logger.enableErrorLogInFile();
     }
+    /*
+     * setter method for message field
+     * @author nazmul hasan on 26th February 2015
+     * 
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    /*
+     * getter method for message field
+     * @author nazmul hasan on 26th February 2015
+     * 
+     */
+    public String getMessage() {
+        return message;
+    }
+    
     /*
      * This method will set ipaddress
      * @param $ipAddress, ipaddress
@@ -51,6 +69,14 @@ public class AuthManager extends DBConnectionManager{
     {
         //<editor-fold defaultstate="collapsed" desc="Chech authentication by username and password">
         logger.print("login attempt [checkUser]: userName:"+userName);
+        if(userName.length() == 0)
+        {
+            setMessage("User name is required");
+        }
+        else if(userPass.length() == 0)
+        {
+            setMessage("Password is required");
+        }
         int userTypeId = 0;
         int userId = 0;
         String sql  = "SELECT exclude_instance_report, exclude_detail_note, exclude_hats, user_id, user_name, user_pass, user_email, create_date, last_update, html, xbrl, user_type_id, active, ";
@@ -63,8 +89,10 @@ public class AuthManager extends DBConnectionManager{
             ResultSet rs    = dbhandler.select(sql);
             if(rs.next())
             {
-                if(!rs.getBoolean("active"))
+                if(!rs.getBoolean("active")){
+                    setMessage("Your account is inactive. Please contact with system administrator.");
                     return uInfo;
+                }
                 loginStat = true;
                 uInfo = new UserInfo();
                 userId = rs.getInt("user_id");
@@ -132,6 +160,7 @@ public class AuthManager extends DBConnectionManager{
                     sql += " (ip_address, wrong_attempt, last_access_time) VALUES ";
                     sql += " ('" + ipAddress + "','" + wrongAttempt + "','" + current_time_sec + "')";
                     int lastInsertedId = dbhandler.insert(sql, DefaultProperties.SEQ_IP_INFO_TBL);
+                    setMessage("Incorrect user name or password. Please try again.");
                     return null;
                 } catch (Exception e) {
                     logger.error("checkUser(userName,userPass) Storing data in IP_INFO_TBL userName: "+userName);
@@ -180,18 +209,22 @@ public class AuthManager extends DBConnectionManager{
                     logger.error("checkUser(userName,userPass) Updating IP_INFO_TBL userName: "+userName);
                     logger.error("EXCEPTION: "+ex.toString());
                 }
+                setMessage("Incorrect user name or password. Please try again.");
                 return null;
             }
             else{
                 if(wrongAttempt >= 5){
                     if(accessTimeDifference < 86400){
+                        setMessage("Your account is locked due to wrong attempt. Please contact with system administrator.");
                         return null;
                     }
                 }
             }
         }
-        if(!loginStat)
+        if(!loginStat){
+            setMessage("Incorrect user name or password. Please try again.");
             return uInfo;
+        }        
         if(userTypeId > 0){
             int subscriberId = this.getSubscriberId(userId);
             try {
@@ -228,6 +261,7 @@ public class AuthManager extends DBConnectionManager{
                     Date today = new Date((new Date()).getTime()-86400000);                    
                     if(today.compareTo(subscriptionToDate)>0){
                         logger.print("UserManager->checkUser()....Subscription period is over, returning null.");
+                        setMessage("Your subscription period is over. Please contact with system administrator.");
                         return null;
                     }                    
                     dbhandler.closeResult(rs);
@@ -247,6 +281,7 @@ public class AuthManager extends DBConnectionManager{
                     if (rs1.next()) {
                         if (!rs1.getBoolean("active")) {
                             logger.print("UserManager->checkUser()....subscriber of this member is inactive, returning null.");
+                            setMessage("Your account is inactive. Please contact with system administrator.");
                             return null;
                         }
                     }
