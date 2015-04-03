@@ -1,27 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xbrl.server.common;
 
 import com.xbrl.log.LogWriter;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.Properties;
 
 /**
  *
- * @author Alamgir
+ * @author Nazmul Hasan
  */
 public class Utilities {
     LogWriter logger = new LogWriter();
     public Utilities()
     {
-        logger.className("XBRLUtils");
+        logger.className("Utilities");
+        logger.disableLog();
         logger.enableLogInFile();
         logger.enableErrorLogInFile();
     }
@@ -39,12 +31,12 @@ public class Utilities {
         catch(IOException ex)
         {
             logger.error("getPropertiesByKey key"+key);
-            ex.printStackTrace();
+            logger.error("EXCEPTION: "+ex.toString());
         }
         catch(Exception ex)
         {
             logger.error("getPropertiesByKey key"+key);
-            ex.printStackTrace();
+            logger.error("EXCEPTION: "+ex.toString());
         }
         return keyValue;
         //</editor-fold>
@@ -100,7 +92,7 @@ public class Utilities {
         //</editor-fold>
     }
     
-        public int writeFileContents(String fileUrl, String fileData, boolean append)
+    public int writeFileContents(String fileUrl, String fileData, boolean append)
     {
         //<editor-fold defaultstate="collapsed" desc="Write given data to given fileName and location.">
         BufferedWriter out=null;

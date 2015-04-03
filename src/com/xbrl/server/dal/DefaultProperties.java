@@ -70,6 +70,9 @@ public interface DefaultProperties
     String CLASS_INFO_TBL               = "class_info";
     String USER_PRICE_INFO_TBL          = "user_price_info";
     String COMPANY_PRICE_INFO_TBL       = "company_price_info";
+    
+    String BILLING_TYPE_INFO_TBL             = "billing_type_info";
+    String BILLING_INFO_TBL             = "billing_info";
 
     /**
      * Project Sequence Names
@@ -123,6 +126,8 @@ public interface DefaultProperties
     String SEQ_CLASS_INFO_TBL = "class_info_id_seq";
     String SEQ_USER_PRICE_INFO_TBL = "user_price_info_user_price_id_seq";
     String SEQ_COMPANY_PRICE_INFO_TBL = "company_price_info_company_price_id_seq";
+    
+    String SEQ_BILLING_INFO_TBL = "billing_id_seq";
     /*
      * Project Error Types
      */
