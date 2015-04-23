@@ -7,11 +7,16 @@ public class BillingInfo {
     public int billingId;
     public int userId;
     public int projectId;
+    public String projectName;
     public int fileId;
+    public String fileName;
+    public int companyId;
     public int billingTypeId;
+    public String billingTypeTitle;
     public float price;
     public int totalPages;
     public int totalWords;
+    public String createdDate;
     
     public BillingInfo()
     {
@@ -26,10 +31,18 @@ public class BillingInfo {
         this.billingTypeId = billingTypeId;
     }
 
+    public void setBillingTypeTitle(String billingTypeTitle) {
+        this.billingTypeTitle = billingTypeTitle;
+    }
+    
     public void setFileId(int fileId) {
         this.fileId = fileId;
     }
 
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+    
     public void setPrice(float price) {
         this.price = price;
     }
@@ -50,6 +63,10 @@ public class BillingInfo {
         this.userId = userId;
     }
 
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+    
     public int getBillingId() {
         return billingId;
     }
@@ -58,10 +75,18 @@ public class BillingInfo {
         return billingTypeId;
     }
 
+    public String getBillingTypeTitle() {
+        return billingTypeTitle;
+    }
+    
     public int getFileId() {
         return fileId;
     }
 
+    public int getCompanyId() {
+        return companyId;
+    }
+    
     public float getPrice() {
         return price;
     }
@@ -81,4 +106,24 @@ public class BillingInfo {
     public int getUserId() {
         return userId;
     }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }    
 }
