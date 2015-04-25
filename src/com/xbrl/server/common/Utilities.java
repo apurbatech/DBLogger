@@ -117,4 +117,18 @@ public class Utilities {
         return 1;
         //</editor-fold>
     }
+    /**
+     * Return System current data time
+     * @return
+     */
+    public String getSystemCurrentDate()
+    {
+        //<editor-fold defaultstate="collapsed" desc="Return Current Date by date format">
+        String format = "yyyy-MM-dd HH:mm:sss";
+        java.text.DateFormat dateFormat = new java.text.SimpleDateFormat(format);
+        java.util.Date date = new java.util.Date();
+        String strDate = dateFormat.format(date);
+        return strDate;
+        //</editor-fold>
+    }
 }

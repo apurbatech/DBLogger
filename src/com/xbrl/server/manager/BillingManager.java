@@ -2,6 +2,7 @@ package com.xbrl.server.manager;
 
 import com.xbrl.log.LogWriter;
 import com.xbrl.server.bean.BillingInfo;
+import com.xbrl.server.common.Utilities;
 import com.xbrl.server.dal.DefaultProperties;
 import java.sql.ResultSet;
 
@@ -26,7 +27,8 @@ public class BillingManager extends DBConnectionManager{
     public boolean addBillingInfo(BillingInfo billingInfo)
     {
         logger.print("Adding biling for for the userid:"+billingInfo.getUserId());
-        boolean status = true;
+        Utilities utilities = new Utilities();
+        String current_time = utilities.getSystemCurrentDate();
         float price = this.getBillingPrice(billingInfo);
         String dynamic_columns = "";
         String dynamic_column_values = "";
@@ -49,8 +51,8 @@ public class BillingManager extends DBConnectionManager{
         {
             String sql = "";
             sql += "INSERT INTO "+DefaultProperties.BILLING_INFO_TBL+" ";
-            sql += " (user_id, price, billing_type_id,  total_pages, total_words"+dynamic_columns+") VALUES ";
-            sql += " ('"+billingInfo.getUserId()+"','"+ price +"','"+ billingInfo.getBillingTypeId() +"','"+ billingInfo.getTotalPages() +"','"+ billingInfo.getTotalWords() +"'"+dynamic_column_values+")";
+            sql += " (user_id, price, billing_type_id,  total_pages, total_words, created_date, modified_date "+dynamic_columns+") VALUES ";
+            sql += " ('"+billingInfo.getUserId()+"','"+ price +"','"+ billingInfo.getBillingTypeId() +"','"+ billingInfo.getTotalPages() +"','"+ billingInfo.getTotalWords() +"','"+ current_time +"','"+ current_time +"'"+dynamic_column_values+")";
             int lastInsertedId  = dbhandler.insert(sql, DefaultProperties.SEQ_BILLING_INFO_TBL);
             if(lastInsertedId > 0)
             {
