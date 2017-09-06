@@ -51,6 +51,9 @@ public class ProfileInfo
     public String languageName;
 
     public boolean shellCompany;
+    
+    public boolean emergingGrowthCompanyFlag;
+    public boolean exTransitionPeriodFlag;
 
     public void setShellCompany(boolean shellCompany) {
         this.shellCompany = shellCompany;
@@ -380,6 +383,22 @@ public class ProfileInfo
     public void setExcludeTicker(boolean excludeTicker) {
         this.excludeTicker = excludeTicker;
     }
+
+    public boolean isEmergingGrowthCompanyFlag() {
+        return emergingGrowthCompanyFlag;
+    }
+
+    public void setEmergingGrowthCompanyFlag(boolean emergingGrowthCompanyFlag) {
+        this.emergingGrowthCompanyFlag = emergingGrowthCompanyFlag;
+    }
+
+    public boolean isExTransitionPeriodFlag() {
+        return exTransitionPeriodFlag;
+    }
+
+    public void setExTransitionPeriodFlag(boolean exTransitionPeriodFlag) {
+        this.exTransitionPeriodFlag = exTransitionPeriodFlag;
+    }
     
     @Override
     public String toString()
@@ -391,7 +410,7 @@ public class ProfileInfo
         strOutput   += "excludeTicker: "+excludeTicker+", lastYearEnd: "+lastYearEnd+", inceptionDate: "+inceptionDate+", lastUpdate: "+lastUpdate+", \n";
         strOutput   += "voluntaryFiler: "+voluntaryFiler+", seasonedIssuer: "+seasonedIssuer+", category: "+category+", proofUserName: "+proofUserName+", \n";
         strOutput   += "ccc: "+ccc+", defaultEdgarContactPerson: "+defaultEdgarContactPerson+", defaultEdgarContactPhone: "+defaultEdgarContactPhone+", sic: "+sic+", \n";
-        strOutput   += "industry: "+industry+", languageCode: "+languageCode+", languageName: "+languageName+", shellCompany: "+shellCompany;
+        strOutput   += "industry: "+industry+", languageCode: "+languageCode+", languageName: "+languageName+", shellCompany: "+shellCompany+", emergingGrowthCompanyFlag: "+emergingGrowthCompanyFlag+", exTransitionPeriodFlag: "+exTransitionPeriodFlag;
         return strOutput;
     }
 }
