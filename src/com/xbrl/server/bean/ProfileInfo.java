@@ -1,14 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xbrl.server.bean;
 
-import java.util.Date;
 
 /**
  *
- * @author sunam
+ * @author Nazmul Hasan
  */
 public class ProfileInfo
 {
@@ -54,6 +49,8 @@ public class ProfileInfo
     
     public boolean emergingGrowthCompanyFlag;
     public boolean exTransitionPeriodFlag;
+    
+    private boolean entitySmallBusiness;
 
     public void setShellCompany(boolean shellCompany) {
         this.shellCompany = shellCompany;
@@ -399,6 +396,14 @@ public class ProfileInfo
     public void setExTransitionPeriodFlag(boolean exTransitionPeriodFlag) {
         this.exTransitionPeriodFlag = exTransitionPeriodFlag;
     }
+
+    public boolean isEntitySmallBusiness() {
+        return entitySmallBusiness;
+    }
+
+    public void setEntitySmallBusiness(boolean entitySmallBusiness) {
+        this.entitySmallBusiness = entitySmallBusiness;
+    }
     
     @Override
     public String toString()
@@ -410,7 +415,7 @@ public class ProfileInfo
         strOutput   += "excludeTicker: "+excludeTicker+", lastYearEnd: "+lastYearEnd+", inceptionDate: "+inceptionDate+", lastUpdate: "+lastUpdate+", \n";
         strOutput   += "voluntaryFiler: "+voluntaryFiler+", seasonedIssuer: "+seasonedIssuer+", category: "+category+", proofUserName: "+proofUserName+", \n";
         strOutput   += "ccc: "+ccc+", defaultEdgarContactPerson: "+defaultEdgarContactPerson+", defaultEdgarContactPhone: "+defaultEdgarContactPhone+", sic: "+sic+", \n";
-        strOutput   += "industry: "+industry+", languageCode: "+languageCode+", languageName: "+languageName+", shellCompany: "+shellCompany+", emergingGrowthCompanyFlag: "+emergingGrowthCompanyFlag+", exTransitionPeriodFlag: "+exTransitionPeriodFlag;
+        strOutput   += "industry: "+industry+", languageCode: "+languageCode+", languageName: "+languageName+", shellCompany: "+shellCompany+", emergingGrowthCompanyFlag: "+emergingGrowthCompanyFlag+", exTransitionPeriodFlag: "+exTransitionPeriodFlag+", entitySmallBusiness: "+entitySmallBusiness;
         return strOutput;
     }
 }
